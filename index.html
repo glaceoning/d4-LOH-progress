@@ -15,19 +15,31 @@
 
     <section class="panel controls">
       <h2>Current Position</h2>
-      <div class="grid">
-        <label>
-          Chapter
-          <select id="chapterSelect"></select>
-        </label>
-        <label>
-          Quest
-          <select id="questSelect" disabled></select>
-        </label>
-        <label>
-          Step
-          <select id="stepSelect" disabled></select>
-        </label>
+      <div class="grid nav-grid">
+        <fieldset class="nav-fieldset">
+          <legend>Chapter</legend>
+          <div class="nav-row">
+            <button id="chapterDownBtn" class="nav-arrow" aria-label="Previous chapter" title="Previous chapter">↓</button>
+            <select id="chapterSelect"></select>
+            <button id="chapterUpBtn" class="nav-arrow" aria-label="Next chapter" title="Next chapter">↑</button>
+          </div>
+        </fieldset>
+        <fieldset class="nav-fieldset">
+          <legend>Quest</legend>
+          <div class="nav-row">
+            <button id="questDownBtn" class="nav-arrow" aria-label="Previous quest" title="Previous quest">↓</button>
+            <select id="questSelect" disabled></select>
+            <button id="questUpBtn" class="nav-arrow" aria-label="Next quest" title="Next quest">↑</button>
+          </div>
+        </fieldset>
+        <fieldset class="nav-fieldset">
+          <legend>Step</legend>
+          <div class="nav-row">
+            <button id="stepDownBtn" class="nav-arrow" aria-label="Previous step" title="Previous step">↓</button>
+            <select id="stepSelect" disabled></select>
+            <button id="stepUpBtn" class="nav-arrow" aria-label="Next step" title="Next step">↑</button>
+          </div>
+        </fieldset>
       </div>
       <div class="actions">
         <button id="startSessionBtn">Start Play Session Here</button>

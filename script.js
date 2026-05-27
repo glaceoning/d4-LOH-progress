@@ -73,6 +73,13 @@ const updateProgressBtn = document.getElementById("updateProgressBtn");
 const cards = document.getElementById("cards");
 const sessionStartText = document.getElementById("sessionStartText");
 
+const chapterUpBtn = document.getElementById("chapterUpBtn");
+const chapterDownBtn = document.getElementById("chapterDownBtn");
+const questUpBtn = document.getElementById("questUpBtn");
+const questDownBtn = document.getElementById("questDownBtn");
+const stepUpBtn = document.getElementById("stepUpBtn");
+const stepDownBtn = document.getElementById("stepDownBtn");
+
 let sessionStart = null;
 
 function uniqueChapters() { return [...new Set(campaign.map((q) => q.chapter))]; }
@@ -92,6 +99,14 @@ function initSelectors() {
   [chapterSelect, questSelect, stepSelect].forEach((el) => el.addEventListener("change", maybeEnableUpdate));
   startSessionBtn.addEventListener("click", startSession);
   updateProgressBtn.addEventListener("click", renderMilestones);
+
+  chapterUpBtn.addEventListener("click", () => nudgeSelect(chapterSelect, 1, populateQuests));
+  chapterDownBtn.addEventListener("click", () => nudgeSelect(chapterSelect, -1, populateQuests));
+  questUpBtn.addEventListener("click", () => nudgeSelect(questSelect, 1, populateSteps));
+  questDownBtn.addEventListener("click", () => nudgeSelect(questSelect, -1, populateSteps));
+  stepUpBtn.addEventListener("click", () => nudgeSelect(stepSelect, 1, maybeEnableUpdate));
+  stepDownBtn.addEventListener("click", () => nudgeSelect(stepSelect, -1, maybeEnableUpdate));
+
   populateQuests();
 }
 
@@ -108,9 +123,18 @@ function populateQuests() {
 function populateSteps() {
   stepSelect.innerHTML = "";
   const questIndex = Number(questSelect.value);
-  campaign[questIndex].steps.forEach((_, idx) => stepSelect.add(new Option(`Step ${idx + 1}`, String(idx))));
+  campaign[questIndex].steps.forEach((stepText, idx) => stepSelect.add(new Option(stepText, String(idx))));
   stepSelect.disabled = false;
   maybeEnableUpdate();
+}
+
+function nudgeSelect(selectEl, delta, onChange) {
+  if (selectEl.disabled || !selectEl.options.length) return;
+  const next = Math.max(0, Math.min(selectEl.options.length - 1, selectEl.selectedIndex + delta));
+  if (next === selectEl.selectedIndex) return;
+  selectEl.selectedIndex = next;
+  onChange();
+  renderMilestones();
 }
 
 function currentSelection() {
