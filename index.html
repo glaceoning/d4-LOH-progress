@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lord of Hatred Progress Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Diablo IV: Lord of Hatred</h1>
+      <p class="subtitle">Spoiler-Free Campaign Progress Tracker</p>
+    </header>
+
+    <section class="panel controls">
+      <h2>Current Position</h2>
+      <div class="grid">
+        <label>
+          Chapter
+          <select id="chapterSelect"></select>
+        </label>
+        <label>
+          Quest
+          <select id="questSelect" disabled></select>
+        </label>
+        <label>
+          Step
+          <select id="stepSelect" disabled></select>
+        </label>
+      </div>
+      <div class="actions">
+        <button id="startSessionBtn">Start Play Session Here</button>
+        <button id="updateProgressBtn" class="secondary" disabled>Update Current Progress</button>
+      </div>
+      <p id="sessionStartText" class="session-note">Session not started yet.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Progress to Milestones</h2>
+      <div id="cards" class="cards"></div>
+    </section>
+  </main>
+
+  <template id="cardTemplate">
+    <article class="milestone-card">
+      <h3 class="milestone-title"></h3>
+      <div class="bars">
+        <div>
+          <div class="label-row"><span>Session Progress</span><span class="session-text"></span></div>
+          <div class="bar-shell"><div class="bar-fill session-fill"></div></div>
+        </div>
+        <div>
+          <div class="label-row"><span>Total Progress</span><span class="total-text"></span></div>
+          <div class="bar-shell"><div class="bar-fill total-fill"></div></div>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
